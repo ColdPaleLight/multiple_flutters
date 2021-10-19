@@ -6,22 +6,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui' as ui;
 
-void main() {
-  var persistentIsolateData = ui.PlatformDispatcher.instance.getPersistentIsolateData();
-  if (persistentIsolateData != null) {
-    var initialArguments = StandardMessageCodec().decodeMessage(persistentIsolateData);
-    if (initialArguments != null && initialArguments is Map) {
-      String color = initialArguments['color'];
-      if (color == 'red') {
-        runApp(const MyApp(color: Colors.red));
-        return;
-      } else if (color == 'yellow') {
-        runApp(const MyApp(color: Colors.yellow));
-        return;
-      }
-    }
+MaterialColor convertStringToColor(String colorStr) {
+  MaterialColor defaultColor = Colors.blue;
+  Map<String, MaterialColor> colors = <String, MaterialColor>{
+    "blue" : Colors.blue,
+    "yellow": Colors.yellow,
+    "red": Colors.red,
+    "green": Colors.green,
+    "purple": Colors.purple
+  };
+  return colors[colorStr] ?? defaultColor;
+}
+
+void main(List<String> rawArgs) {
+  var initialArguments = ui.PlatformDispatcher.instance.getInitialArguments(rawArgs: rawArgs);
+  MaterialColor color = Colors.blue;
+  if (initialArguments != null && initialArguments is Map) {
+    String colorStr = initialArguments['color'];
+    color = convertStringToColor(colorStr);
   }
-  runApp(const MyApp(color: Colors.blue));
+  runApp(MyApp(color: color));
 }
 
 class MyApp extends StatelessWidget {
