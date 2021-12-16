@@ -15,7 +15,7 @@ class SingleFlutterViewController: FlutterViewController, DataModelObserver {
 
     init(withEntrypoint entryPoint: String? ,initialRoute: String?, initialArguments:NSObject?) {
     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        let newEngine = appDelegate.engines.makeEngine(withEntrypoint: entryPoint, libraryURI: nil, initialRoute: initialRoute, initialArguments: initialArguments)
+        let newEngine = appDelegate.engines.makeEngine(withEntrypoint: entryPoint, libraryURI: nil, initialRoute: initialRoute)
     super.init(engine: newEngine, nibName: nil, bundle: nil)
     DataModel.shared.addObserver(observer: self)
   }

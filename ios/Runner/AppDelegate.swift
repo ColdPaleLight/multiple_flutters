@@ -8,7 +8,7 @@ import UIKit
 /// The app's UIApplicationDelegate.
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  let engines = FlutterEngineGroup(name: "multiple-flutters", project: nil)
+  let engines = FlutterEngineGroup(name: "multiple-flutters", project: nil, sharedIsolateMode: true)
 
   func application(
     _ application: UIApplication,
