@@ -42,7 +42,7 @@ class EngineBindings(activity: Activity, delegate: EngineBindingsDelegate, entry
             DartExecutor.DartEntrypoint(
                 FlutterInjector.instance().flutterLoader().findAppBundlePath(), entrypoint
             )
-        engine = app.engines.createAndRunEngine(activity, dartEntrypoint, initialRoute, initialArguments);
+        engine = app.engines.createAndRunEngine(activity, dartEntrypoint, initialRoute);
         this.delegate = delegate
         channel = MethodChannel(engine.dartExecutor.binaryMessenger, "multiple-flutters")
     }

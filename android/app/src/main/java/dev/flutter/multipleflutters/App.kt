@@ -13,6 +13,6 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        engines = FlutterEngineGroup(this)
+        engines = FlutterEngineGroup(this, null ,/** sharedIsolateMode */ true)
     }
 }

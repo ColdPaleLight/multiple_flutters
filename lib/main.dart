@@ -6,26 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui' as ui;
 
-MaterialColor convertStringToColor(String colorStr) {
+MaterialColor convertNumberToColor(int number) {
   MaterialColor defaultColor = Colors.blue;
-  Map<String, MaterialColor> colors = <String, MaterialColor>{
-    "blue" : Colors.blue,
-    "yellow": Colors.yellow,
-    "red": Colors.red,
-    "green": Colors.green,
-    "purple": Colors.purple
+  Map<int, MaterialColor> colors = <int, MaterialColor>{
+    0 : Colors.blue,
+    1 : Colors.yellow,
+    2: Colors.red,
+    3: Colors.green,
+    4 : Colors.purple
   };
-  return colors[colorStr] ?? defaultColor;
+  return colors[number % 5] ?? defaultColor;
 }
 
-void main(List<String> rawArgs) {
-  var initialArguments = ui.PlatformDispatcher.instance.getInitialArguments(rawArgs: rawArgs);
-  MaterialColor color = Colors.blue;
-  if (initialArguments != null && initialArguments is Map) {
-    String colorStr = initialArguments['color'];
-    color = convertStringToColor(colorStr);
-  }
-  runApp(MyApp(color: color));
+int count = 0;
+
+void main() {
+  runApp(MyApp(color: convertNumberToColor(count)));
+  count++;
 }
 
 class MyApp extends StatelessWidget {
